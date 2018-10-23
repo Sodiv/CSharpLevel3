@@ -10,6 +10,16 @@ namespace MailSenderLib
 {
     public class EMailSenderClass
     {
+        /// <summary>
+        /// Отправка письма
+        /// </summary>
+        /// <param name="fromEmail">От кого</param>
+        /// <param name="toEmail">Кому</param>
+        /// <param name="subject">Тема письма</param>
+        /// <param name="body">Тело письма</param>
+        /// <param name="smtpClient">Адрес почтового сервера</param>
+        /// <param name="user">Пользователь</param>
+        /// <param name="password">Пароль</param>
         public void SendMessage(string fromEmail, string toEmail, string subject, string body, string smtpClient, string  user, string password)
         {
             using(var email =new MailMessage(fromEmail, toEmail))

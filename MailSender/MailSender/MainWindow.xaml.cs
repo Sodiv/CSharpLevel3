@@ -52,7 +52,9 @@ namespace MailSender
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, VariableString.error, MessageBoxButton.OK, MessageBoxImage.Error);
+                ErrorDialog errorDialog = new ErrorDialog(error);
+                errorDialog.Owner = this;
+                errorDialog.ShowDialog();
                 return;
             }
 
