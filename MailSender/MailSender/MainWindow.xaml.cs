@@ -48,7 +48,7 @@ namespace MailSender
                 //}
                 #endregion
                 senderClass.SendMessage(VariableString.fromEMail, VariableString.toEMail,
-                    VariableString.subject, VariableString.body, VariableString.smtpClient, tb_UserName.Text, pb_Password.Password);
+                    tb_Subject.Text, tb_Body.Text, VariableString.smtpClient, tb_UserName.Text, pb_Password.Password);
             }
             catch (Exception error)
             {
