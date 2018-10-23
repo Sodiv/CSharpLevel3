@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpamLib
 {
-    class Scheduler
+    public class Scheduler
     {
     }
 }
