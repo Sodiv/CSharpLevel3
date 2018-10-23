@@ -57,6 +57,7 @@
     <Compile Include="SendCompleteDialog.xaml.cs">
       <DependentUpon>SendCompleteDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VariableString.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

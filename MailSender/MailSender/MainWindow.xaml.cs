@@ -25,15 +25,15 @@ namespace MailSender
         public MainWindow() => InitializeComponent();
         
         private void SendButton_OnClick(object sender, RoutedEventArgs e)
-        {
+        {            
             try
             {
-                using(var email = new MailMessage("sodiv@mail.ru", "sozdiv@gmail.com"))
+                using(var email = new MailMessage(VariableString.fromEMail, VariableString.toEMail))
                 {
-                    email.Subject = "Тема письма";
-                    email.Body = "Тело письма";
+                    email.Subject = VariableString.subject;
+                    email.Body = VariableString.body;
 
-                    using(var client=new SmtpClient("smtp.mail.ru"))
+                    using(var client=new SmtpClient(VariableString.smtpClient))
                     {
                         var user = tb_UserName.Text;
                         var password = pb_Password.SecurePassword;
@@ -46,7 +46,7 @@ namespace MailSender
             }
             catch(Exception error)
             {
-                MessageBox.Show(error.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(error.Message, VariableString.error, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
