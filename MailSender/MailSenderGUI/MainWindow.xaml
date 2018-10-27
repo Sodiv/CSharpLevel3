@@ -58,7 +58,10 @@
                         </ToolBar>                    
                         <ToolBar Band="1" BandIndex="0">
                             <TextBlock Text="Выбрать smtp-сервер" VerticalAlignment="Center" Margin="0,0,3,0"/>
-                            <ComboBox x:Name="serverComboBox" Width="150" ItemsSource="{x:Static spam:Servers.Items}" SelectedIndex="0">
+                            <ComboBox x:Name="serverComboBox" Width="150" ItemsSource="{x:Static spam:Servers.Items}" 
+                                      SelectedValue="{Binding Source=spam:MailService.server}" 
+                                      SelectedValuePath="Server"
+                                      SelectedIndex="0">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate DataType="spam:Server">
                                         <StackPanel>
@@ -83,11 +86,8 @@
                             </Button>
                         </ToolBar>
                         <ToolBar Band="0" BandIndex="1">
-                            <Button Click="GoToPlanner_OnClick">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Height="16" Source="media/clock.png"/>
-                                    <TextBlock Text="Перейти в планировщик"/>
-                                </StackPanel>
+                            <Button Click="GoToPlanner_OnClick" ToolTip="Перейти в планировщик">
+                                <Image Height="16" Source="media/clock.png"/>
                             </Button>
                         </ToolBar>
                         <ToolBar Band="1">

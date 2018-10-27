@@ -14,8 +14,10 @@ namespace SpamLib
         private string _Login;
         private string _Password;
 
-        private string _ServerAddress = "smtp.mail.ru";
-        private int _Port = 25;
+        public static Server server;
+
+        private string _ServerAddress = server.Address;
+        private int _Port = server.Port;
 
         private string _Body;
         private string _Subject;
