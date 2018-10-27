@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpamLib", "SpamLib\SpamLib.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSenderLib", "MailSenderLib\MailSenderLib.csproj", "{6EE4ED33-95A4-4CA5-A224-843542C40D06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordLib", "PasswordLib\PasswordLib.csproj", "{F2920026-EB03-472D-9BAF-65EE92AE90BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6EE4ED33-95A4-4CA5-A224-843542C40D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EE4ED33-95A4-4CA5-A224-843542C40D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EE4ED33-95A4-4CA5-A224-843542C40D06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2920026-EB03-472D-9BAF-65EE92AE90BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2920026-EB03-472D-9BAF-65EE92AE90BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2920026-EB03-472D-9BAF-65EE92AE90BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2920026-EB03-472D-9BAF-65EE92AE90BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

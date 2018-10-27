@@ -24,5 +24,15 @@ namespace MailSenderGUI
         {
             InitializeComponent();
         }
+
+        private void GoToPlanner_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainTabControl.SelectedItem = TimePlannerTab;
+        }
+
+        private void OnExitClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
