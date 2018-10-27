@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:local="clr-namespace:MailSenderGUI"
         mc:Ignorable="d"
         xmlns:spam="clr-namespace:SpamLib;assembly=SpamLib"
@@ -59,7 +60,7 @@
                         <ToolBar Band="1" BandIndex="0">
                             <TextBlock Text="Выбрать smtp-сервер" VerticalAlignment="Center" Margin="0,0,3,0"/>
                             <ComboBox x:Name="serverComboBox" Width="150" ItemsSource="{x:Static spam:Servers.Items}" 
-                                      SelectedValue="{Binding Source=spam:MailService.server}" 
+                                      SelectedValue="{Binding Path=server, Source=spam:MailService}" 
                                       SelectedValuePath="Server"
                                       SelectedIndex="0">
                                 <ComboBox.ItemTemplate>
@@ -135,7 +136,7 @@
                         <TextBlock Text="Дата"/>
                         <Calendar SelectionMode="MultipleRange"/>
                         <TextBlock Text="Время"/>
-                        <TextBox/>
+                        <wpfTool:TimePicker/>
                         <Button Content="Запланировать"/>
                         <Button Content="Отправить немедленно"/>
                     </StackPanel>
@@ -146,7 +147,9 @@
             </TabItem>
             <TabItem Header="Редактор писем">
                 <Grid>
-                    <RichTextBox/>
+                    <RichTextBox>
+                        <FlowDocument/>
+                    </RichTextBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Статистика" IsEnabled="False"></TabItem>
