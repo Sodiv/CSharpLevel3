@@ -30,7 +30,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <ToolBarTray>
-                        <ToolBar>
+                        <ToolBar>                            
                             <TextBlock Text="Отправители" VerticalAlignment="Center" Margin="0,0,3,0"/>
                             <ComboBox Width="150" ItemsSource="{x:Static spam:Senders.Items}" SelectedIndex="0">
                                 <ComboBox.ItemTemplate>
@@ -57,18 +57,28 @@
                             </Button>
                         </ToolBar>                    
                         <ToolBar Band="1" BandIndex="0">
-                            <TextBlock Text="Серверы" VerticalAlignment="Center" Margin="0,0,3,0"/>
-                            <ComboBox Width="150"/>
-                            <Button ToolTip="Добавить отправителя">
+                            <TextBlock Text="Выбрать smtp-сервер" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                            <ComboBox x:Name="serverComboBox" Width="150" ItemsSource="{x:Static spam:Servers.Items}" SelectedIndex="0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="spam:Server">
+                                        <StackPanel>
+                                            <TextBlock>
+                                                Сервер: <TextBlock Text="{Binding Name}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button ToolTip="Добавить smtp-сервер">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="media/add.png" Height="16"/>
                                     <TextBlock Text="Добавить"/>
                                 </StackPanel>
                             </Button>
-                            <Button ToolTip="Удалить отправителя">
+                            <Button ToolTip="Удалить smtp-сервер">
                                 <Image Height="16" Source="media/remove.png"/>
                             </Button>
-                            <Button ToolTip="Редактировать отправителя">
+                            <Button ToolTip="Редактировать smtp-сервер">
                                 <Image Height="16" Source="media/edit.png"/>
                             </Button>
                         </ToolBar>

@@ -8,6 +8,9 @@ using PasswordLib;
 
 namespace SpamLib
 {
+    /// <summary>
+    /// Список отправителей
+    /// </summary>
     public class Senders
     {
         public static ObservableCollection<Sender> Items = new ObservableCollection<Sender>
