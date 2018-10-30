@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using SpamLib;
 
 namespace MailSenderGUI.View
 {
@@ -32,6 +33,14 @@ namespace MailSenderGUI.View
             set { nameTextBlock.Text = value; }
         }
 
-        
+        public ObservableCollection<Sender> ListSenders
+        {
+            set { listComboBox.ItemsSource = value; }
+        }
+
+        public ObservableCollection<Server> ListServer
+        {
+            set { listComboBox.ItemsSource = value; }
+        }
     }
 }

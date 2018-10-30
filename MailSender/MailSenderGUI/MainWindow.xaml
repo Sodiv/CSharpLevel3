@@ -62,10 +62,10 @@
                             </Button>
                         </ToolBar>-->
                         <ToolBar>
-                            <view:ToolBarView NameLabel="Отправители:" DataContext="{x:Static spam:Senders.Items}"/>
+                            <view:ToolBarView NameLabel="Отправители:" ListSenders="{x:Static spam:Senders.Items}"/>
                         </ToolBar>
                         <ToolBar Band="1" BandIndex="0">
-                            <TextBlock Text="Выбрать smtp-сервер" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                            <!--<TextBlock Text="Выбрать smtp-сервер" VerticalAlignment="Center" Margin="0,0,3,0"/>
                             <ComboBox x:Name="serverComboBox" Width="150" ItemsSource="{x:Static spam:Servers.Items}" 
                                       SelectedValue="{Binding Path=server, Source=spam:MailService}" 
                                       SelectedValuePath="Server"
@@ -91,7 +91,8 @@
                             </Button>
                             <Button ToolTip="Редактировать smtp-сервер">
                                 <Image Height="16" Source="media/edit.png"/>
-                            </Button>
+                            </Button>-->
+                            <view:ToolBarView NameLabel="Выбрать smtp-сервер:" ListServer="{x:Static spam:Servers.Items}"/>
                         </ToolBar>
                         <ToolBar Band="0" BandIndex="1">
                             <Button Click="GoToPlanner_OnClick" ToolTip="Перейти в планировщик">
