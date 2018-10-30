@@ -102,6 +102,9 @@
     <Compile Include="View\RecipientsView.xaml.cs">
       <DependentUpon>RecipientsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ToolBarView.xaml.cs">
+      <DependentUpon>ToolBarView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -119,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RecipientsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ToolBarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,6 +158,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MailSenderLib\MailSenderLib.csproj">
+      <Project>{99359404-ff8b-4616-8fec-c5b918b62413}</Project>
+      <Name>MailSenderLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpamLib\SpamLib.csproj">
       <Project>{55ebde0c-d1a3-4306-adc4-8fa3b66980cf}</Project>
       <Name>SpamLib</Name>

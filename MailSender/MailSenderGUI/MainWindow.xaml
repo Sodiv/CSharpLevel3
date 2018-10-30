@@ -35,7 +35,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <ToolBarTray>
-                        <ToolBar>                            
+                        <!--<ToolBar>                            
                             <TextBlock Text="Отправители" VerticalAlignment="Center" Margin="0,0,3,0"/>
                             <ComboBox Width="150" ItemsSource="{x:Static spam:Senders.Items}" SelectedIndex="0">
                                 <ComboBox.ItemTemplate>
@@ -50,19 +50,20 @@
                             </ComboBox>
                             <Button ToolTip="Добавить отправителя">
                                 <StackPanel Orientation="Horizontal">
-                                    <!--<Image Source="media/add.png" Height="16"/>-->
                                     <fa:ImageAwesome Height="16" Icon="PlusCircle" Foreground="Lime"/>
                                     <TextBlock Text="Добавить"/>
                                 </StackPanel>
                             </Button>
                             <Button ToolTip="Удалить отправителя">
                                 <fa:ImageAwesome Height="16" Icon="Remove" Foreground="Red"/>
-                                <!--<Image Height="16" Source="media/remove.png"/>-->
                             </Button>
                             <Button ToolTip="Редактировать отправителя">
                                 <fa:ImageAwesome Height="16" Icon="Edit" Foreground="DarkBlue"/>
                             </Button>
-                        </ToolBar>                    
+                        </ToolBar>-->
+                        <ToolBar>
+                            <view:ToolBarView NameLabel="Отправители:" DataContext="{x:Static spam:Senders.Items}"/>
+                        </ToolBar>
                         <ToolBar Band="1" BandIndex="0">
                             <TextBlock Text="Выбрать smtp-сервер" VerticalAlignment="Center" Margin="0,0,3,0"/>
                             <ComboBox x:Name="serverComboBox" Width="150" ItemsSource="{x:Static spam:Servers.Items}" 
