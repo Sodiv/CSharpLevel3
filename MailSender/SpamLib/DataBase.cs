@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SpamLib
 {
-    class DataBase
+    public class DataBase
     {
+        private readonly RecipientsDataContext _Recipients = new RecipientsDataContext();
+
+        public IQueryable<Recipient> Recipients => _Recipients.Recipient;
     }
 }

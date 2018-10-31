@@ -10,28 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SpamLib;
 
-namespace MailSenderGUI
+namespace MailSender
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ErrorDialog.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ErrorDialog : Window
     {
-        public MainWindow()
+        public ErrorDialog(Exception exception)
         {
             InitializeComponent();
+            tb_Error.Text = exception.Message;
         }
 
-        private void GoToPlanner_OnClick(object sender, RoutedEventArgs e)
-        {
-            MainTabControl.SelectedItem = TimePlannerTab;
-        }
-
-        private void OnExitClick(object sender, RoutedEventArgs e)
+        private void OkButton_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
