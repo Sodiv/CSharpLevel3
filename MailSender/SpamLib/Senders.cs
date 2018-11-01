@@ -19,7 +19,10 @@ namespace SpamLib
             new Sender{Name="Petrov", Email="petrov@server.org", Password=PasswordEncoder.Encode("Password2")},
             new Sender{Name="Sidorov", Email="sidorov@server.org", Password=PasswordEncoder.Encode("Password3")}
         };
+        
     }
+
+    
 
     public class Sender
     {

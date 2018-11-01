@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using SpamLib;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
+using System.Windows;
 
 namespace MailSenderGUI.ViewModel
 {
@@ -42,7 +43,6 @@ namespace MailSenderGUI.ViewModel
         public MainWindowViewModel(IDataAccessService DataAccessService)
         {
             _DataAccessService = DataAccessService;
-            //Recipients = _DataAccessService.GetRecipients();
 
             UpdateDataCommand = new RelayCommand(OnUpdateDataCommandExecuted, UpdateDataCommandCanExecute);
 

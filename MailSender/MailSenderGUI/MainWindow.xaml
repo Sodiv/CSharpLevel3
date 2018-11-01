@@ -34,65 +34,12 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <ToolBarTray>
-                        <!--<ToolBar>                            
-                            <TextBlock Text="Отправители" VerticalAlignment="Center" Margin="0,0,3,0"/>
-                            <ComboBox Width="150" ItemsSource="{x:Static spam:Senders.Items}" SelectedIndex="0">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate DataType="spam:Sender">
-                                        <StackPanel>
-                                            <TextBlock>
-                                                Имя:<TextBlock Text="{Binding Name}"/>
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Button ToolTip="Добавить отправителя">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa:ImageAwesome Height="16" Icon="PlusCircle" Foreground="Lime"/>
-                                    <TextBlock Text="Добавить"/>
-                                </StackPanel>
-                            </Button>
-                            <Button ToolTip="Удалить отправителя">
-                                <fa:ImageAwesome Height="16" Icon="Remove" Foreground="Red"/>
-                            </Button>
-                            <Button ToolTip="Редактировать отправителя">
-                                <fa:ImageAwesome Height="16" Icon="Edit" Foreground="DarkBlue"/>
-                            </Button>
-                        </ToolBar>-->
+                    <ToolBarTray>                        
                         <ToolBar>
-                            <view:ToolBarView NameLabel="Отправители:" ListSenders="{x:Static spam:Senders.Items}"/>
+                            <local:ToolBarItemsControl PanelName="Отправители" ItemSource="{x:Static spam:Senders.Items}"/>
                         </ToolBar>
                         <ToolBar Band="1" BandIndex="0">
-                            <!--<TextBlock Text="Выбрать smtp-сервер" VerticalAlignment="Center" Margin="0,0,3,0"/>
-                            <ComboBox x:Name="serverComboBox" Width="150" ItemsSource="{x:Static spam:Servers.Items}" 
-                                      SelectedValue="{Binding Path=server, Source=spam:MailService}" 
-                                      SelectedValuePath="Server"
-                                      SelectedIndex="0">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate DataType="spam:Server">
-                                        <StackPanel>
-                                            <TextBlock>
-                                                Сервер: <TextBlock Text="{Binding Name}"/>
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Button ToolTip="Добавить smtp-сервер">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="media/add.png" Height="16"/>
-                                    <TextBlock Text="Добавить"/>
-                                </StackPanel>
-                            </Button>
-                            <Button ToolTip="Удалить smtp-сервер">
-                                <Image Height="16" Source="media/remove.png"/>
-                            </Button>
-                            <Button ToolTip="Редактировать smtp-сервер">
-                                <Image Height="16" Source="media/edit.png"/>
-                            </Button>-->
-                            <view:ToolBarView NameLabel="Выбрать smtp-сервер:" ListServer="{x:Static spam:Servers.Items}"/>
+                            <local:ToolBarItemsControl PanelName="smtp-сервер" ItemSource="{x:Static spam:Servers.Items}"/>
                         </ToolBar>
                         <ToolBar Band="0" BandIndex="1">
                             <Button Click="GoToPlanner_OnClick" ToolTip="Перейти в планировщик">
@@ -120,22 +67,7 @@
                             <ColumnDefinition Width="4*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <GroupBox Header="Группы" Grid.Row="1">
-                            <!--<GroupBox.Resources>
-                                <spam:DataBase x:Key="DataBaseObject"/>
-                            </GroupBox.Resources>-->
-                            <!--<DataGrid ItemsSource="{Binding Recipients}" 
-                                  AutoGenerateColumns="False"
-                                  HorizontalGridLinesBrush="{x:Null}"
-                                  AlternatingRowBackground="LightBlue"
-                                  IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="#" Binding="{Binding Id}"/>
-                                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                                <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
-                                <DataGridTextColumn Header="Comment" Width="*"/>
-                            </DataGrid.Columns>
-                        </DataGrid>-->
+                        <GroupBox Header="Группы" Grid.Row="1">                            
                             <view:RecipientsView/>
                         </GroupBox>
                         <view:RecipientEditView Grid.Column="1"/>
@@ -157,7 +89,12 @@
                         <TextBlock Text="Время"/>
                         <wpfTool:TimePicker/>
                         <Button Content="Запланировать"/>
-                        <Button Content="Отправить немедленно"/>
+                        <Button>
+                            <StackPanel Orientation="Horizontal">
+                                <fa:ImageAwesome Height="16" Icon="Telegram" Foreground="Blue"/>
+                                <TextBlock Text="Отправить немедленно" Margin="3,0"/>
+                            </StackPanel>                            
+                        </Button>
                     </StackPanel>
                     <GroupBox Grid.Column="1" Header="Список расписания">
                         <ItemsControl/>
