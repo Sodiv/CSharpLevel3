@@ -59,6 +59,11 @@
     <Compile Include="Scheduler.cs" />
     <Compile Include="Senders.cs" />
     <Compile Include="Servers.cs" />
+    <Compile Include="Shedules.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Shedules.dbml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -73,6 +78,14 @@
     </None>
     <None Include="Recipients.dbml.layout">
       <DependentUpon>Recipients.dbml</DependentUpon>
+    </None>
+    <None Include="Shedules.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Shedules.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Shedules.dbml.layout">
+      <DependentUpon>Shedules.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

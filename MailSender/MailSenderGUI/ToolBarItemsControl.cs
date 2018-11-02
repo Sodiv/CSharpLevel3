@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SpamLib;
+using System.Windows.Controls.Primitives;
 
 namespace MailSenderGUI
 {    
@@ -32,6 +33,19 @@ namespace MailSenderGUI
             get => (ICollection)GetValue(ItemSourceProperty);
             set => SetValue(ItemSourceProperty, value);
         }
+
+        public object SelectItem
+        {
+            get => (object)GetValue(SelectItemProperty);
+            set => SetValue(SelectItemProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectItemProperty =
+            DependencyProperty.Register(
+                nameof(SelectItem),
+                typeof(object),
+                typeof(ToolBarItemsControl),
+                new PropertyMetadata(null));
 
         public static readonly DependencyProperty PanelNameProperty =
             DependencyProperty.Register(

@@ -25,14 +25,24 @@ namespace MailSenderGUI.ViewModel
         }
 
         public ObservableCollection<Recipient> Recipients { get; private set; }
+        public ObservableCollection<Shedule> Shedules { get; private set; }
 
         private Recipient _CurrentRecipient;
+        private Sender _CurrentSender;
 
         public Recipient CurrentRecipient
         {
             get => _CurrentRecipient;
             set => Set(ref _CurrentRecipient, value);
         }
+
+        public Sender CurrentSender
+        {
+            get => _CurrentSender;
+            set => Set(ref _CurrentSender, value);
+        }
+
+        public ICommand UpdateDataShedCommand { get; }
 
         public ICommand UpdateDataCommand { get; }
 
@@ -44,12 +54,22 @@ namespace MailSenderGUI.ViewModel
         {
             _DataAccessService = DataAccessService;
 
+            UpdateDataShedCommand = new RelayCommand(OnUpdateDataShedCommandExecuted, UpdateDataShedCommandCanExecute);
+
             UpdateDataCommand = new RelayCommand(OnUpdateDataCommandExecuted, UpdateDataCommandCanExecute);
 
             CreateNewRecipient = new RelayCommand<Recipient>(OnCreateNewRecipientExecuted, CreateNewRecipientCanExecute);
             UpdateRecipient = new RelayCommand<Recipient>(OnUpdateRecipientExecuted, UpdateRecipientCanExecute);
         }
-        
+
+        private void OnUpdateDataShedCommandExecuted()
+        {
+            Shedules = _DataAccessService.GetShedules();
+            RaisePropertyChanged(nameof(this.Shedules));
+        }
+
+        public bool UpdateDataShedCommandCanExecute() => true;
+
         private void OnUpdateDataCommandExecuted()
         {
             Recipients = _DataAccessService.GetRecipients();

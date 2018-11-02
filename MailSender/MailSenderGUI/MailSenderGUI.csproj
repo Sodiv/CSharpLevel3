@@ -97,6 +97,9 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\ListItemShedulerView.xaml.cs">
+      <DependentUpon>ListItemShedulerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RecipientEditView.xaml.cs">
       <DependentUpon>RecipientEditView.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ListItemShedulerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RecipientEditView.xaml">
       <SubType>Designer</SubType>

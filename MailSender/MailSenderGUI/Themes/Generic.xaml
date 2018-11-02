@@ -25,7 +25,7 @@
                         <Button DockPanel.Dock="Right">
                             <fa:ImageAwesome Icon="PlusCircle" Foreground="Lime"/>
                         </Button>
-                        <ComboBox ItemsSource="{TemplateBinding ItemSource}" SelectedIndex="0">
+                        <ComboBox ItemsSource="{TemplateBinding ItemSource}" SelectedIndex="0" SelectedItem="{TemplateBinding SelectItem}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>

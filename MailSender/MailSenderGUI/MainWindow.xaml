@@ -36,7 +36,9 @@
                     </Grid.RowDefinitions>
                     <ToolBarTray>                        
                         <ToolBar>
-                            <local:ToolBarItemsControl PanelName="Отправители" ItemSource="{x:Static spam:Senders.Items}"/>
+                            <local:ToolBarItemsControl PanelName="Отправители" 
+                                                       ItemSource="{x:Static spam:Senders.Items}" 
+                                                       SelectItem="{Binding CurrentSender}"/>
                         </ToolBar>
                         <ToolBar Band="1" BandIndex="0">
                             <local:ToolBarItemsControl PanelName="smtp-сервер" ItemSource="{x:Static spam:Servers.Items}"/>
@@ -83,21 +85,22 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel>
-                        <TextBlock Text="Дата"/>
-                        <Calendar SelectionMode="MultipleRange"/>
-                        <TextBlock Text="Время"/>
-                        <wpfTool:TimePicker/>
-                        <Button Content="Запланировать"/>
-                        <Button>
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Дата"/>
+                        <Calendar DockPanel.Dock="Top" SelectionMode="MultipleRange"/>
+                        <TextBlock DockPanel.Dock="Top" Text="Время"/>
+                        <!--<wpfTool:TimePicker/>-->
+                        <Button DockPanel.Dock="Bottom">
                             <StackPanel Orientation="Horizontal">
                                 <fa:ImageAwesome Height="16" Icon="Telegram" Foreground="Blue"/>
                                 <TextBlock Text="Отправить немедленно" Margin="3,0"/>
-                            </StackPanel>                            
+                            </StackPanel>
                         </Button>
-                    </StackPanel>
+                        <Button DockPanel.Dock="Bottom" Content="Запланировать"/>
+                        <view:ListItemShedulerView/>
+                    </DockPanel>
                     <GroupBox Grid.Column="1" Header="Список расписания">
-                        <ItemsControl/>
+                        <ItemsControl ItemsSource="{Binding Shedules}"/>
                     </GroupBox>
                 </Grid>
             </TabItem>
