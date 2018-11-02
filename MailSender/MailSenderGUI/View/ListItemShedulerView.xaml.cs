@@ -12,28 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SpamLib;
 
-namespace MailSenderGUI
+namespace MailSenderGUI.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ListItemShedulerView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ListItemShedulerView : UserControl
     {
-        public MainWindow()
+        public ListItemShedulerView()
         {
             InitializeComponent();
-        }
-
-        private void GoToPlanner_OnClick(object sender, RoutedEventArgs e)
-        {
-            MainTabControl.SelectedItem = TimePlannerTab;
-        }
-
-        private void OnExitClick(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
     }
 }

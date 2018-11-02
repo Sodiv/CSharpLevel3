@@ -7,15 +7,38 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Отправить"
-                Margin="275,150,357,0"
-                Height="20"
-                VerticalAlignment="Top" Click="SendButton_OnClick"/>
-        <TextBlock Margin="370,99,272,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Height="16">
-            
-        </TextBlock>
-        <PasswordBox x:Name="pb_Password" Margin="370,120,282,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_UserName" HorizontalAlignment="Left" Height="18" Margin="190,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-        <TextBlock Margin="190,99,0,0" Text="Имя пользователя" VerticalAlignment="Top" Height="16" HorizontalAlignment="Left" Width="150"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Отправить"
+                    Height="20"
+                    Width="100"
+                    VerticalAlignment="Top" Click="SendButton_OnClick"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Имя пользователя" VerticalAlignment="Top" Height="16" HorizontalAlignment="Left" Width="150"/>
+            <TextBox x:Name="tb_UserName" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>            
+        </StackPanel>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Height="16"/>
+            <PasswordBox x:Name="pb_Password" Height="18" Width="150"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock Text="Тема письма"/>
+                <TextBox Margin="5" x:Name="tb_Subject" Height="16" Width="150"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Тема письма"/>
+                <TextBox Margin="5" x:Name="tb_Body" Height="250" Width="400"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

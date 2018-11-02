@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
 using System.Net.Mail;
+using MailSenderLib;
 
 namespace MailSender
 {
@@ -22,31 +23,38 @@ namespace MailSender
     /// </summary>
     public partial class MainWindow : Window
     {
+        EMailSenderClass senderClass = new EMailSenderClass();
         public MainWindow() => InitializeComponent();
         
         private void SendButton_OnClick(object sender, RoutedEventArgs e)
-        {
+        {            
             try
             {
-                using(var email = new MailMessage("sodiv@mail.ru", "sozdiv@gmail.com"))
-                {
-                    email.Subject = "Тема письма";
-                    email.Body = "Тело письма";
+                #region Из Урока
+                //using(var email = new MailMessage(VariableString.fromEMail, VariableString.toEMail))
+                //{
+                //    email.Subject = VariableString.subject;
+                //    email.Body = VariableString.body;
 
-                    using(var client=new SmtpClient("smtp.mail.ru"))
-                    {
-                        var user = tb_UserName.Text;
-                        var password = pb_Password.SecurePassword;
-                        client.Credentials = new NetworkCredential(user, password);
-                        client.EnableSsl = true;
+                //    using(var client=new SmtpClient(VariableString.smtpClient))
+                //    {
+                //        var user = tb_UserName.Text;
+                //        var password = pb_Password.SecurePassword;
+                //        client.Credentials = new NetworkCredential(user, password);
+                //        client.EnableSsl = true;
 
-                        client.Send(email);
-                    }
-                }
+                //        client.Send(email);
+                //    }
+                //}
+                #endregion
+                senderClass.SendMessage(VariableString.fromEMail, VariableString.toEMail,
+                    tb_Subject.Text, tb_Body.Text, VariableString.smtpClient, tb_UserName.Text, pb_Password.Password);
             }
-            catch(Exception error)
+            catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                ErrorDialog errorDialog = new ErrorDialog(error);
+                errorDialog.Owner = this;
+                errorDialog.ShowDialog();
                 return;
             }
 
