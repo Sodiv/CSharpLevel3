@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PersonLib.Data
 {
-    class PeopleContext : DbContext
+    public partial class PeopleContext : DbContext
     {
         public PeopleContext() : base("name=DbConnection") { }
 

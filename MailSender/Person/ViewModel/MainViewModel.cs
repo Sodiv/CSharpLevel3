@@ -32,10 +32,10 @@ namespace Person.ViewModel
 
         private bool UpdateDataCommandCanExecute() => true;
 
-        private void OnUpdateDataCommandExecuted()
+        private async void OnUpdateDataCommandExecuted()
         {
-            Peoples = _DataAccessService.GetPersons();
-            RaisePropertyChanged(nameof(this.Peoples));
+            Peoples = await _DataAccessService.GetPersonsAsync();
+            RaisePropertyChanged(nameof(Peoples));
         }
     }
 }
