@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordLib", "PasswordLib\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSenderLib", "MailSenderLib\MailSenderLib.csproj", "{99359404-FF8B-4616-8FEC-C5B918B62413}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Person", "Person\Person.csproj", "{BD997403-E88F-4D71-8E60-595AEB1A5527}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonLib", "PersonLib\PersonLib.csproj", "{8F38FC36-2DDC-4382-83F4-A931DE4ACF6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{99359404-FF8B-4616-8FEC-C5B918B62413}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99359404-FF8B-4616-8FEC-C5B918B62413}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99359404-FF8B-4616-8FEC-C5B918B62413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD997403-E88F-4D71-8E60-595AEB1A5527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD997403-E88F-4D71-8E60-595AEB1A5527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD997403-E88F-4D71-8E60-595AEB1A5527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD997403-E88F-4D71-8E60-595AEB1A5527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F38FC36-2DDC-4382-83F4-A931DE4ACF6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F38FC36-2DDC-4382-83F4-A931DE4ACF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F38FC36-2DDC-4382-83F4-A931DE4ACF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F38FC36-2DDC-4382-83F4-A931DE4ACF6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
