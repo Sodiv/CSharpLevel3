@@ -1,46 +1,113 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpamLib.Data;
 
 namespace SpamLib
 {
     public interface IDataAccessService
     {
         ObservableCollection<Recipient> GetRecipients();
-        ObservableCollection<Shedule> GetShedules();
+        Task<ObservableCollection<Recipient>> GetRecipientsAsync();
 
         int CreateRecipient(Recipient recipient);
+
+        Task<ObservableCollection<ScheduleTask>> GetScheduleTask();
+
+        Task<ObservableCollection<Email>> GetEmailsAsync();
+
+        Task<bool> AddNewEmailAsync(Email email);
+        Task<bool> RemoveEmailAsync(Email email);
+        Task<int> CreateRecipientAsync(Recipient recipient);
+        Task<bool> DeleteRecipientAsync(Recipient recipient);
     }
 
     public class DataAccessServiceFromDB : IDataAccessService
     {
-        private RecipientsDataContext _DatabaseContext;
-        private ShedulesDataContext _ShedulesDataContext;
-
-        public DataAccessServiceFromDB()
-        {
-            _DatabaseContext = new RecipientsDataContext();
-            _ShedulesDataContext = new ShedulesDataContext();
-        }
-
         public ObservableCollection<Recipient> GetRecipients()
         {
-            return new ObservableCollection<Recipient>(_DatabaseContext.Recipient.ToArray());
+            using (var db = new SpamDatabase())
+                return new ObservableCollection<Recipient>(db.Recipients.ToArray());
         }
 
-        public ObservableCollection<Shedule> GetShedules()
+        public async Task<ObservableCollection<Recipient>> GetRecipientsAsync()
         {
-            return new ObservableCollection<Shedule>(_ShedulesDataContext.Shedule.ToArray());
+            using (var db = new SpamDatabase())
+                return new ObservableCollection<Recipient>(await db.Recipients.ToArrayAsync());
         }
 
         public int CreateRecipient(Recipient recipient)
         {
-            _DatabaseContext.Recipient.InsertOnSubmit(recipient);
-            _DatabaseContext.SubmitChanges();
-            return recipient.Id;
+            using (var db = new SpamDatabase())
+            {
+                db.Recipients.Add(recipient);
+                if (db.SaveChanges() > 0)
+                    return recipient.Id;
+            }
+            return 0;
+        }
+
+        public async Task<int> CreateRecipientAsync(Recipient recipient)
+        {
+            using (var db = new SpamDatabase())
+            {
+                db.Recipients.AddOrUpdate(recipient);
+                if (await db.SaveChangesAsync().ConfigureAwait(false) > 0)
+                    return recipient.Id;
+            }
+            return 0;
+        }
+
+        public async Task<ObservableCollection<ScheduleTask>> GetScheduleTask()
+        {
+            using (var db = new SpamDatabase())
+                return new ObservableCollection<ScheduleTask>(await db.ScheduleTasks
+                        .Include(task => task.Emails)
+                        .Include(task => task.MailingList)
+                        .Include(task => task.Sender)
+                        .Include(task => task.Server)
+                        .Include(task => task.MailingList.Recipients)
+                        .ToArrayAsync().ConfigureAwait(false));
+        }
+
+        public async Task<ObservableCollection<Email>> GetEmailsAsync()
+        {
+            using (var db = new SpamDatabase())
+                return new ObservableCollection<Email>(await db.Emails.ToArrayAsync());
+        }
+
+        public async Task<bool> AddNewEmailAsync(Email email)
+        {
+            using (var db = new SpamDatabase())
+            {
+                db.Emails.Add(email);
+                return await db.SaveChangesAsync() > 0;
+            }
+        }
+
+        public async Task<bool> RemoveEmailAsync(Email email)
+        {
+            using (var db = new SpamDatabase())
+            {
+                db.Emails.Attach(email);
+                db.Emails.Remove(email);
+                return await db.SaveChangesAsync() > 0;
+            }
+        }
+
+        public async Task<bool> DeleteRecipientAsync(Recipient recipient)
+        {
+            using(var db=new SpamDatabase())
+            {
+                db.Recipients.Attach(recipient);
+                db.Recipients.Remove(recipient);
+                return await db.SaveChangesAsync() > 0;
+            }
         }
     }
 }

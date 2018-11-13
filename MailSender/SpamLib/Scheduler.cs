@@ -12,43 +12,43 @@ namespace SpamLib
 {
     public class Scheduler
     {
-        DispatcherTimer timer = new DispatcherTimer();
-        EmailSendService emailSender;
-        DateTime dtSend;
-        ObservableCollection<Recipient> recipients;
+        //DispatcherTimer timer = new DispatcherTimer();
+        //EmailSendService emailSender;
+        //DateTime dtSend;
+        //ObservableCollection<Recipient> recipients;
 
-        public TimeSpan GetSendTime(string strSendTime)
-        {
-            TimeSpan tsSendTime = new TimeSpan();
-            try
-            {
-                tsSendTime = TimeSpan.Parse(strSendTime);
-            }
-            catch { }
-            return tsSendTime;
-        }
+        //public TimeSpan GetSendTime(string strSendTime)
+        //{
+        //    TimeSpan tsSendTime = new TimeSpan();
+        //    try
+        //    {
+        //        tsSendTime = TimeSpan.Parse(strSendTime);
+        //    }
+        //    catch { }
+        //    return tsSendTime;
+        //}
 
-        public void SendEmails(DateTime dtSend, EmailSendService emailSender, ObservableCollection<Recipient> recipients)
-        {
-            this.emailSender = emailSender;
-            this.dtSend = dtSend;
-            this.recipients = recipients;
-            timer.Tick += Timer_Tick;
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Start();
-        }
+        //public void SendEmails(DateTime dtSend, EmailSendService emailSender, ObservableCollection<Recipient> recipients)
+        //{
+        //    this.emailSender = emailSender;
+        //    this.dtSend = dtSend;
+        //    this.recipients = recipients;
+        //    timer.Tick += Timer_Tick;
+        //    timer.Interval = new TimeSpan(0, 0, 1);
+        //    timer.Start();
+        //}
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            if (dtSend.ToShortTimeString() == DateTime.Now.ToShortTimeString())
-            {
-                foreach(var recipient in recipients)
-                {
-                    emailSender.SendMail(recipient.Email, recipient.Name);
-                }
-                timer.Stop();
-                MessageBox.Show("Письма отправлены");
-            }
-        }
+        //private void Timer_Tick(object sender, EventArgs e)
+        //{
+        //    if (dtSend.ToShortTimeString() == DateTime.Now.ToShortTimeString())
+        //    {
+        //        foreach(var recipient in recipients)
+        //        {
+        //            emailSender.SendMail(recipient.Email, recipient.Name);
+        //        }
+        //        timer.Stop();
+        //        MessageBox.Show("Письма отправлены");
+        //    }
+        //}
     }
 }

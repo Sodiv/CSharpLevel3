@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using SpamLib;
+using SpamLib.Data;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows;
+using System.Collections;
 
 namespace MailSenderGUI.ViewModel
 {
@@ -24,74 +26,147 @@ namespace MailSenderGUI.ViewModel
             set => Set(ref _Title, value);
         }
 
-        public ObservableCollection<Recipient> Recipients { get; private set; }
-        public ObservableCollection<Shedule> Shedules { get; private set; }
+        private ObservableCollection<Recipient> _Recipients;
+        public ObservableCollection<Recipient> Recipients
+        {
+            get => _Recipients;
+            private set => Set(ref _Recipients, value);
+        }
 
         private Recipient _CurrentRecipient;
-        private Sender _CurrentSender;
-
         public Recipient CurrentRecipient
         {
             get => _CurrentRecipient;
             set => Set(ref _CurrentRecipient, value);
         }
 
-        public Sender CurrentSender
+        #region Emails : ObservableCollection<Email> - Сообщения
+
+        /// <summary>Сообщения</summary>
+        private ObservableCollection<Email> _Emails;
+
+        /// <summary>Сообщения</summary>
+        public ObservableCollection<Email> Emails
         {
-            get => _CurrentSender;
-            set => Set(ref _CurrentSender, value);
+            get => _Emails;
+            set => Set(ref _Emails, value);
         }
 
-        public ICommand UpdateDataShedCommand { get; }
+        #endregion
+
+        #region SelectedEmail : Email - Выбранное сообщение
+
+        /// <summary>Выбранное сообщение</summary>
+        private Email _SelectedEmail;
+
+        /// <summary>Выбранное сообщение</summary>
+        public Email SelectedEmail
+        {
+            get => _SelectedEmail;
+            set => Set(ref _SelectedEmail, value);
+        }
+
+        #endregion
+
 
         public ICommand UpdateDataCommand { get; }
 
         public ICommand CreateNewRecipient { get; }
-
         public ICommand UpdateRecipient { get; }
+        public ICommand SaveRecipient { get; }
+        public ICommand DeleteRecipient { get; }
+
+        public ICommand AddNewEmailCommand { get; }
+        public ICommand RemoveEmailCommand { get; }
 
         public MainWindowViewModel(IDataAccessService DataAccessService)
         {
             _DataAccessService = DataAccessService;
 
-            UpdateDataShedCommand = new RelayCommand(OnUpdateDataShedCommandExecuted, UpdateDataShedCommandCanExecute);
-
             UpdateDataCommand = new RelayCommand(OnUpdateDataCommandExecuted, UpdateDataCommandCanExecute);
 
-            CreateNewRecipient = new RelayCommand<Recipient>(OnCreateNewRecipientExecuted, CreateNewRecipientCanExecute);
-            UpdateRecipient = new RelayCommand<Recipient>(OnUpdateRecipientExecuted, UpdateRecipientCanExecute);
+            CreateNewRecipient = new RelayCommand(OnCreateNewRecipientExecuted);
+            UpdateRecipient = new RelayCommand<Recipient>(OnUpdateRecepientExecuted, UpdateRecepientCanExecute);
+            SaveRecipient = new RelayCommand(OnSaveRecipientExecuted);
+            DeleteRecipient = new RelayCommand<Recipient>(OnDeleteRecipientExecuted, DeleteRecipientCanExecute);
+
+            AddNewEmailCommand = new RelayCommand(OnAddNewEmailCommandExecuted);
+            RemoveEmailCommand = new RelayCommand<object>(OnRemoveEmailCommandExecuted, RemoveEmailCommandCanExecute);
+
+            InitializeAsync();
         }
 
-        private void OnUpdateDataShedCommandExecuted()
+        private bool DeleteRecipientCanExecute(Recipient recipient) => recipient != null;
+
+        private async void OnDeleteRecipientExecuted(Recipient recipient)
         {
-            Shedules = _DataAccessService.GetShedules();
-            RaisePropertyChanged(nameof(this.Shedules));
+            if (await _DataAccessService.DeleteRecipientAsync(recipient))
+                Recipients.Remove(recipient);
         }
 
-        public bool UpdateDataShedCommandCanExecute() => true;
-
-        private void OnUpdateDataCommandExecuted()
+        private async void OnSaveRecipientExecuted()
         {
-            Recipients = _DataAccessService.GetRecipients();
-            RaisePropertyChanged(nameof(this.Recipients));
+            if (await _DataAccessService.CreateRecipientAsync(CurrentRecipient) > 0)
+                Recipients.Add(CurrentRecipient);
+        }
+
+        private bool RemoveEmailCommandCanExecute(object Arg) => Arg is Email || Arg is IList list && list.Count > 0;
+
+        private async void OnRemoveEmailCommandExecuted(object Obj)
+        {
+            switch (Obj)
+            {
+                case Email email:
+                    if (await _DataAccessService.RemoveEmailAsync(email))
+                    Emails.Remove(email);
+                    break;
+                case IList email_list:
+                    foreach (var email in email_list.OfType<Email>().ToArray())
+                        if (await _DataAccessService.RemoveEmailAsync(email))
+                        Emails.Remove(email);
+                    break;
+            }
+        }
+
+        private async void OnAddNewEmailCommandExecuted()
+        {
+            var new_email = new Email
+            {
+                Title = "Заголовок письма",
+                Body = ""
+            };
+            if (await _DataAccessService.AddNewEmailAsync(new_email))
+                Emails.Add(new_email);
+        }
+
+        private async void InitializeAsync()
+        {
+            if (IsInDesignMode) return;
+
+            Recipients = await _DataAccessService.GetRecipientsAsync();
+            Emails = await _DataAccessService.GetEmailsAsync();
+            //SelectedEmail = Emails.FirstOrDefault();
         }
 
         public bool UpdateDataCommandCanExecute() => true;
 
-        private bool CreateNewRecipientCanExecute(Recipient recipient) => recipient != null;
+        private void OnUpdateDataCommandExecuted()
+        {
+            Recipients = _DataAccessService.GetRecipients();
+            RaisePropertyChanged(nameof(Recipients));
+        }
 
-        private void OnCreateNewRecipientExecuted(Recipient recipient)
+        private void OnCreateNewRecipientExecuted()
         {
             CurrentRecipient = new Recipient();
         }
 
-        private bool UpdateRecipientCanExecute(Recipient recipient) => recipient != null; // || _CurrentRecipient != null;
+        private bool UpdateRecepientCanExecute(Recipient recipient) => recipient != null;// || _CurrentRecipient != null;
 
-        private void OnUpdateRecipientExecuted(Recipient recipient)
+        private void OnUpdateRecepientExecuted(Recipient recipient)
         {
-            if (_DataAccessService.CreateRecipient(recipient) > 0)
-                Recipients.Add(recipient);
+            //if(_DataAccessService.CreateRecipient(recipient) > 0)
+            //    Recipients.Add(recipient);
         }
-
     }
 }

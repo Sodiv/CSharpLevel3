@@ -2,6 +2,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using CommonServiceLocator;
 using SpamLib;
+using SpamLib.Data;
 
 namespace MailSenderGUI.ViewModel
 {

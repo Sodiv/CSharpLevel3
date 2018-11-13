@@ -33,7 +33,7 @@
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
-                <DataGridTextColumn Header="Comment" Width="*" Binding="{Binding Comment, TargetNullValue=[null]}"/>
+                <DataGridTextColumn Header="Comment" Width="*" Binding="{Binding Description, TargetNullValue=[null]}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>
