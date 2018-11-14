@@ -44,9 +44,10 @@
                     <Setter Property="Margin" Value="10,3"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Импорт из CSV"/>
-            <Button Content="Добавить"/>
-            <Button Content="Сохранить"/>
+            <Button Content="Импорт из CSV" Command="{Binding OpenFileCommand}"/>
+            <Button Content="Добавить" Command="{Binding AddDataCommand}"/>
+            <Button Content="Сохранить" Command="{Binding SaveDataCommand}"
+                    CommandParameter="{Binding SelectedPeople}"/>
             <Button Content="Удалить"/>
         </StackPanel>
     </Grid>

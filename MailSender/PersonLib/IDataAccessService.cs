@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace PersonLib
     {
         ObservableCollection<People> GetPersons();
         Task<ObservableCollection<People>> GetPersonsAsync();
+
+        Task<int> SavePersonAsync(People people);
     }
 
     public class DataAccessServiceFromDB : IDataService
@@ -27,6 +30,17 @@ namespace PersonLib
         {
             using (var db = new PeopleContext())
                 return new ObservableCollection<People>(await db.Peoples.ToArrayAsync());
+        }
+
+        public async Task<int> SavePersonAsync(People people)
+        {
+            using(var db=new PeopleContext())
+            {
+                db.Peoples.AddOrUpdate(people);
+                if (await db.SaveChangesAsync().ConfigureAwait(false) > 0)
+                    return people.Id;
+            }
+            return 0;
         }
     }
 }
