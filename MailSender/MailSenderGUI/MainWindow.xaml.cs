@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SpamLib;
 
 namespace MailSenderGUI
 {
@@ -23,6 +24,16 @@ namespace MailSenderGUI
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void GoToPlanner_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainTabControl.SelectedItem = TimePlannerTab;
+        }
+
+        private void OnExitClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
