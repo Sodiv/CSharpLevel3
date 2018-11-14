@@ -19,6 +19,13 @@ namespace Person.ViewModel
             set => Set(ref _Peoples, value);
         }
 
+        private People _SelectedPeople;
+        public People SelectedPeople
+        {
+            get => _SelectedPeople;
+            set => Set(ref _SelectedPeople, value);
+        }
+
         public ICommand UpdateDataCommand { get; }
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.

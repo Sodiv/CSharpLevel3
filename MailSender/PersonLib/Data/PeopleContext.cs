@@ -10,7 +10,7 @@ namespace PersonLib.Data
 {
     public partial class PeopleContext : DbContext
     {
-        public PeopleContext() : base("name=DbConnection") { }
+        public PeopleContext() : base("name=DbConnection") { Database.CreateIfNotExists(); }
 
         public virtual DbSet<People> Peoples { get; set; }
     }

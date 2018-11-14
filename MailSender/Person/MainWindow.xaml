@@ -22,8 +22,32 @@
             <RowDefinition Height="9*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListView ItemsSource="{Binding Peoples}">
-            
+        <ListView ItemsSource="{Binding Peoples}" SelectedItem="{Binding SelectedPeople}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding FullName}"/>
+                </GridView>
+            </ListView.View>
         </ListView>
+        <StackPanel DataContext="{Binding SelectedPeople}" Grid.Column="1">
+            <TextBlock Text="ФИО"/>
+            <TextBox Text="{Binding FullName}"/>
+            <TextBlock Text="E-mail"/>
+            <TextBox Text="{Binding Email}"/>
+            <TextBlock Text="Телефон"/>
+            <TextBox Text="{Binding TelNumber}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Width" Value="100"/>
+                    <Setter Property="Margin" Value="10,3"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="Импорт из CSV"/>
+            <Button Content="Добавить"/>
+            <Button Content="Сохранить"/>
+            <Button Content="Удалить"/>
+        </StackPanel>
     </Grid>
 </Window>
